@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="./images/logo.png" alt="Логотип">
+    </header>
+    <main class="content">
+        <section class="profile">
+            <div class="profile__header">
+                <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+                <div class="profile__info">
+                    <div class="profile__text">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <p class="profile__description">Исследователь океана</p>
+                    </div>
+                    <button class="profile__edit-button"></button>
+                </div>
+            </div>
+            <button class="profile__add-button"></button>
+        </section>
+        <section class="elements">
+            <div class="element">
+                <img class="element__image" src="./images/bagan.jpg" alt="Изображение Баган">
+                <div class="element__title">
+                    <h2 class="element__place">Баган</h2>
+                    <button class="element__like"></button>
+                </div> 
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/bamboo_forest.jpg" alt="Изображение Бамбукового леса>">
+                <div class="element__title">
+                    <h2 class="element__place">Бамбуковый лес</h2>
+                    <button class="element__like"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/navagio.jpg" alt="Изображение Навагио">
+                <div class="element__title">
+                    <h2 class="element__place">Бухта Навагио </h2>
+                    <button class="element__like"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/pamukkale.jpg" alt="Изображение Памуккале">
+                <div class="element__title">
+                    <h2 class="element__place">Памуккале</h2>
+                    <button class="element__like"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/santorini.jpg" alt="Изображение Санторини">
+                <div class="element__title">
+                    <h2 class="element__place">Санторини</h2>
+                    <button class="element__like"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/venice.jpg" alt="Изображение Венеции">
+                <div class="element__title">
+                    <h2 class="element__place">Венеция</h2>
+                    <button class="element__like"></button>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <p class="footer__author">&copy; 2021 Mesto Russia</p>
+        </footer>
+    </main>
+    <section class="popup">
+        <div class="popup__container">
+            <button class="popup__close" type="button"></button>
+            <form class="popup__form">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <fieldset class="popup__info">
+                    <input type="text" class="popup__item popup__name" id="name" name="name" required value="Жак-Ив Кусто">
+                    <input type="text" class="popup__item popup__description" id="description" name="description" required value="Исследователь океана">
+                </fieldset>
+                <fieldset class="popup__save">
+                    <button class="popup__save-button" type="submit">Сохранить</button>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+        <script src="./scripts/main.js"></script>
+</body>

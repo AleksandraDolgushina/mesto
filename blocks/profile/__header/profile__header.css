@@ -1,0 +1,16 @@
+.profile__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 1024px) {
+    .profile__header {
+        justify-content: start;
+    }
+}
+
+@media screen and (max-width: 690px) {
+    .profile__header {
+        display: inline-block;
+    }
+}
