@@ -3,7 +3,7 @@
     margin-top: 67px;
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 582px) {
     .footer {
         margin-bottom: 36px;
     }
