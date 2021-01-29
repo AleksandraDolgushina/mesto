@@ -8,9 +8,6 @@
     transition: opacity .4s;
     color: white;
     margin-top: 48px;
-}
-
-.popup__save-button[type=submit] {
     background-color: black;
 }
 

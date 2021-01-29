@@ -9,21 +9,23 @@ let nameProfile = document.querySelector('.profile__name');
 let jobProfile = document.querySelector('.profile__description');
 
 function openPopup() {
-    popup.classList.toggle('popup_opened');
+    popup.classList.add('popup_opened');
     nameInput.value = nameProfile.textContent;
     jobInput.value = jobProfile.textContent;
 }
 
+function closePopup() {
+    popup.classList.remove('popup_opened');
+}
+
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
-    nameInput.getAttribute('value');
-    jobInput.getAttribute('value');
     nameProfile.textContent = nameInput.value
     jobProfile.textContent = jobInput.value
-    openPopup()
+    closePopup()
 }
 popupOpenButton.addEventListener('click', openPopup);
 
-popupCloseButton.addEventListener('click', openPopup); 
+popupCloseButton.addEventListener('click', closePopup); 
 
 formElement.addEventListener('submit', formSubmitHandler);
