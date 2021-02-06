@@ -79,16 +79,27 @@ function getItem(item) {
   return newItem;
 }
 
+function handlerAdd(evt, popup) {
+  evt.preventDefault()
+  const titleEl = titleInput.value;
+  const linkEl = linkInput.value;
+  const cardItem = getItem({name: titleEl, link: linkEl});
+  cardEl.prepend(cardItem);
+  titleInput.value = ''
+  linkInput.value = ''
+  closePopup(popup)
+} 
+
 render();
 
 popupOpenEdit.addEventListener('click', () => {openPopup(popupEdit); });
 
 popupCloseEdit.addEventListener('click', () => {closePopup(popupEdit); }); 
 
-formElementEdit.addEventListener('submit', (evt) => {formSubmitHandler(evt, popupEdit); });
+formElementEdit.addEventListener('submit', (evt) => {formSubmitHandler(evt, popupEdit)});
 
 popupOpenAdd.addEventListener('click', () => {openPopup(popupAdd); });
 
 popupCloseAdd.addEventListener('click', () => {closePopup(popupAdd); }); 
 
-formElementAdd.addEventListener('submit', (evt) => {formSubmitHandler(evt, popupAdd); });
+formElementAdd.addEventListener('submit', (evt) => {handlerAdd(evt, popupAdd)});

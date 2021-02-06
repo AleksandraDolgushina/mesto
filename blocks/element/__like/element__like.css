@@ -15,5 +15,8 @@
 
 .element__like:focus {
     outline: none;
-    background: url(../../../images/like_black.svg);
+    background: url(../../../images/like_black.svg) center no-repeat;
+    background-size: 100%;
+    width: 22px;
+    height: 19px;
 }
