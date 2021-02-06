@@ -20,8 +20,6 @@ const templateEl = document.querySelector('.template');
 const popupOpenImage = document.querySelector('.popup__open-image');
 const popupImage = document.querySelector('.popup__image');
 const popupPlace = document.querySelector('.popup__place');
-
-console.log(popupOpenImage)
 const initialCards = [
     {
       name: 'Архыз',
@@ -94,6 +92,7 @@ function getItem(item) {
     
   imageEl.addEventListener('click', function(evt) {
     popupImage.src = imageEl.src
+    popupImage.alt = imageEl.alt
     popupPlace.textContent = placeEl.textContent
     openPopup(popupOpenImage)
   })
