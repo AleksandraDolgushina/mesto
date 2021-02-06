@@ -25,64 +25,52 @@
             <button class="profile__add-button"></button>
         </section>
         <section class="elements">
-            <div class="element">
-                <img class="element__image" src="./images/bagan.jpg" alt="Изображение Баган">
-                <div class="element__title">
-                    <h2 class="element__place">Баган</h2>
-                    <button class="element__like"></button>
-                </div> 
-            </div>
-            <div class="element">
-                <img class="element__image" src="./images/bamboo_forest.jpg" alt="Изображение Бамбукового леса>">
-                <div class="element__title">
-                    <h2 class="element__place">Бамбуковый лес</h2>
-                    <button class="element__like"></button>
-                </div>
-            </div>
-            <div class="element">
-                <img class="element__image" src="./images/navagio.jpg" alt="Изображение Навагио">
-                <div class="element__title">
-                    <h2 class="element__place">Бухта Навагио </h2>
-                    <button class="element__like"></button>
-                </div>
-            </div>
-            <div class="element">
-                <img class="element__image" src="./images/pamukkale.jpg" alt="Изображение Памуккале">
-                <div class="element__title">
-                    <h2 class="element__place">Памуккале</h2>
-                    <button class="element__like"></button>
-                </div>
-            </div>
-            <div class="element">
-                <img class="element__image" src="./images/santorini.jpg" alt="Изображение Санторини">
-                <div class="element__title">
-                    <h2 class="element__place">Санторини</h2>
-                    <button class="element__like"></button>
-                </div>
-            </div>
-            <div class="element">
-                <img class="element__image" src="./images/venice.jpg" alt="Изображение Венеции">
-                <div class="element__title">
-                    <h2 class="element__place">Венеция</h2>
-                    <button class="element__like"></button>
-                </div>
-            </div>
         </section>
         <footer class="footer">
             <p class="footer__author">&copy; 2021 Mesto Russia</p>
         </footer>
     </main>
-    <section class="popup">
+    <template class="template">
+        <div class="element">
+            <img class="element__image" src="" alt="">
+            <button class="element__delete"></button>
+            <div class="element__title">
+                <h2 class="element__place"></h2>
+                <button class="element__like"></button>
+            </div> 
+        </div>
+    </template>
+    <section class="popup popup__edit">
         <div class="popup__container">
-            <button class="popup__close" type="button"></button>
-            <form class="popup__form" name="form">
+            <button class="popup__close popup__close-edit" type="button"></button>
+            <form class="popup__form" name="form-edit">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <fieldset class="popup__info">
                     <input type="text" class="popup__item popup__item_type_name" id="name" name="name" required value="Жак-Ив Кусто">
                     <input type="text" class="popup__item popup__item_type_description" id="description" name="description" required value="Исследователь океана">
                 </fieldset>
-                    <button class="popup__save-button" type="submit">Сохранить</button>
+                <button class="popup__save-button popup__save-edit" type="submit">Сохранить</button>
             </form>
+        </div>
+    </section>
+    <section class="popup popup__add">
+        <div class="popup__container">
+            <button class="popup__close popup__close-add" type="button"></button>
+            <form class="popup__form" name="form-add">
+                <h2 class="popup__title">Новое место</h2>
+                <fieldset class="popup__info">
+                    <input type="text" class="popup__item popup__item_type_title" id="title" name="title" required placeholder="Название">
+                    <input type="text" class="popup__item popup__item_type_link" id="link" name="link" required placeholder="Ссылка на картинку">
+                </fieldset>
+                    <button class="popup__save-button popup__save-add" type="submit">Создать</button>
+            </form>
+        </div>
+    </section>
+    <section class="popup popup__open-image">
+        <div class="popup__container-image">
+            <button class="popup__close popup__close-image" type="button"></button>
+            <img class="popup__image" src="" alt="">
+            <h2 class="popup__place"></h2>
         </div>
     </section>
         <script src="./scripts/main.js"></script>
