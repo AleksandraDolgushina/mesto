@@ -1,5 +1,5 @@
-const popupEdit = document.querySelector('.popup__edit');
-const popupAdd = document.querySelector('.popup__add');
+const popupEdit = document.querySelector('.popup_edit');
+const popupAdd = document.querySelector('.popup_add');
 const popupOpenEdit = document.querySelector('.profile__edit-button');
 const popupOpenAdd = document.querySelector('.profile__add-button');
 const popupCloseEdit = document.querySelector('.popup__close-edit');
@@ -17,7 +17,7 @@ const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__description');
 const cardEl = document.querySelector('.elements');
 const templateEl = document.querySelector('.template');
-const popupOpenImage = document.querySelector('.popup__open-image');
+const popupOpenImage = document.querySelector('.popup_open-image');
 const popupImage = document.querySelector('.popup__image');
 const popupPlace = document.querySelector('.popup__place');
 const initialCards = [
