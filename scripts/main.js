@@ -49,15 +49,14 @@ const initialCards = [
   
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    nameInput.value = nameProfile.textContent;
-    jobInput.value = jobProfile.textContent;
+
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
-function formSubmitHandler(evt, popup) {
+function handleSubmitHandler(evt, popup) {
     evt.preventDefault(); 
     nameProfile.textContent = nameInput.value
     jobProfile.textContent = jobInput.value
@@ -91,9 +90,9 @@ function getItem(item) {
   })
     
   imageEl.addEventListener('click', function(evt) {
-    popupImage.src = imageEl.src
-    popupImage.alt = imageEl.alt
-    popupPlace.textContent = placeEl.textContent
+    popupImage.src = item.link;
+    popupImage.alt = item.name;
+    popupPlace.textContent = item.name;
     openPopup(popupOpenImage)
   })
 
@@ -101,7 +100,7 @@ function getItem(item) {
   return newItem;
 }
 
-function handlerAdd(evt, popup) {
+function handleAdd(evt, popup) {
   evt.preventDefault()
   const titleEl = titleInput.value;
   const linkEl = linkInput.value;
@@ -115,16 +114,20 @@ function handlerAdd(evt, popup) {
 
 render();
 
-popupOpenEdit.addEventListener('click', () => {openPopup(popupEdit); });
+popupOpenEdit.addEventListener('click', () => {
+  openPopup(popupEdit);
+  nameInput.value = nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
+ });
 
 popupCloseEdit.addEventListener('click', () => {closePopup(popupEdit); }); 
 
-formElementEdit.addEventListener('submit', (evt) => {formSubmitHandler(evt, popupEdit)});
+formElementEdit.addEventListener('submit', (evt) => {handleSubmitHandler(evt, popupEdit)});
 
 popupOpenAdd.addEventListener('click', () => {openPopup(popupAdd); });
 
 popupCloseAdd.addEventListener('click', () => {closePopup(popupAdd); }); 
 
-formElementAdd.addEventListener('submit', (evt) => {handlerAdd(evt, popupAdd)});
+formElementAdd.addEventListener('submit', (evt) => {handleAdd(evt, popupAdd)});
 
 popupCloseImage.addEventListener('click', () => {closePopup(popupOpenImage); }); 
