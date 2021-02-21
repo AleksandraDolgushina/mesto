@@ -15,6 +15,15 @@
     opacity: .8;
 }
 
+.popup__save-button:disabled {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 2px;
+    opacity: .2;
+}
+
 @media screen and (max-width: 582px) {
     .popup__save-button {
         font-size: 14px;
