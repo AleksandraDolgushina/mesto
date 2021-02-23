@@ -3,4 +3,8 @@
     line-height: 15px;
     color: #e53e3e;
     opacity: 0;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    transition: opacity 0.3s;
 }

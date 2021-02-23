@@ -49,8 +49,6 @@ const initialCards = [
   
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    nameInput.value = nameProfile.textContent;
-    jobInput.value = jobProfile.textContent;
 }
 
 function closePopup(popup) {
@@ -111,11 +109,19 @@ function handlerAdd(evt, popup) {
   closePopup(popup)
 }
 
-
+const closePopupOverlay = (evt, popup) => {
+ if (evt.target === evt.currentTarget) {
+   closePopup(popup)
+ }
+}
 
 render();
 
-popupOpenEdit.addEventListener('click', () => {openPopup(popupEdit); });
+popupOpenEdit.addEventListener('click', () => {
+  openPopup(popupEdit);
+  nameInput.value = nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
+ });
 
 popupCloseEdit.addEventListener('click', () => {closePopup(popupEdit); }); 
 
@@ -128,3 +134,9 @@ popupCloseAdd.addEventListener('click', () => {closePopup(popupAdd); });
 formElementAdd.addEventListener('submit', (evt) => {handlerAdd(evt, popupAdd)});
 
 popupCloseImage.addEventListener('click', () => {closePopup(popupOpenImage); }); 
+
+popupEdit.addEventListener('click', (evt) => {closePopupOverlay(evt, popupEdit)});
+
+popupAdd.addEventListener('click', (evt) => { closePopupOverlay(evt, popupAdd)});
+
+popupOpenImage.addEventListener('click', (evt) => { closePopupOverlay(evt, popupOpenImage)});
