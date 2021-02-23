@@ -1,5 +1,5 @@
-const popupEdit = document.querySelector('.popup__edit');
-const popupAdd = document.querySelector('.popup__add');
+const popupEdit = document.querySelector('.popup_edit');
+const popupAdd = document.querySelector('.popup_add');
 const popupOpenEdit = document.querySelector('.profile__edit-button');
 const popupOpenAdd = document.querySelector('.profile__add-button');
 const popupCloseEdit = document.querySelector('.popup__close-edit');
@@ -17,7 +17,7 @@ const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__description');
 const cardEl = document.querySelector('.elements');
 const templateEl = document.querySelector('.template');
-const popupOpenImage = document.querySelector('.popup__open-image');
+const popupOpenImage = document.querySelector('.popup_open-image');
 const popupImage = document.querySelector('.popup__image');
 const popupPlace = document.querySelector('.popup__place');
 const initialCards = [
@@ -55,7 +55,7 @@ function closePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
-function formSubmitHandler(evt, popup) {
+function handleSubmitHandler(evt, popup) {
     evt.preventDefault(); 
     nameProfile.textContent = nameInput.value
     jobProfile.textContent = jobInput.value
@@ -89,9 +89,9 @@ function getItem(item) {
   })
     
   imageEl.addEventListener('click', function(evt) {
-    popupImage.src = imageEl.src
-    popupImage.alt = imageEl.alt
-    popupPlace.textContent = placeEl.textContent
+    popupImage.src = item.link;
+    popupImage.alt = item.name;
+    popupPlace.textContent = item.name;
     openPopup(popupOpenImage)
   })
 
@@ -138,7 +138,7 @@ linkInput.addEventListener('keydown', (evt) => {closePopupEcs(evt, popupAdd)});
 
 titleInput.addEventListener('keydown', (evt) => {closePopupEcs(evt, popupAdd)});
 
-formElementEdit.addEventListener('submit', (evt) => {formSubmitHandler(evt, popupEdit)});
+formElementEdit.addEventListener('submit', (evt) => {handleSubmitHandler(evt, popupEdit)});
 
 popupOpenAdd.addEventListener('click', () => {
   openPopup(popupAdd);
@@ -148,7 +148,7 @@ popupOpenAdd.addEventListener('click', () => {
 
 popupCloseAdd.addEventListener('click', () => {closePopup(popupAdd); }); 
 
-formElementAdd.addEventListener('submit', (evt) => {handlerAdd(evt, popupAdd)});
+formElementAdd.addEventListener('submit', (evt) => {handleAdd(evt, popupAdd)});
 
 popupCloseImage.addEventListener('click', () => {closePopup(popupOpenImage); }); 
 
