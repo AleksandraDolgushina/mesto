@@ -95,8 +95,13 @@ function getItem(item) {
     openPopup(popupOpenImage)
   })
 
-
   return newItem;
+}
+
+function closePopupEcs(evt, popup) {
+  if (evt.key === 'Escape') {
+    closePopup(popup);
+  }
 }
 
 function handlerAdd(evt, popup) {
@@ -123,11 +128,23 @@ popupOpenEdit.addEventListener('click', () => {
   jobInput.value = jobProfile.textContent;
  });
 
-popupCloseEdit.addEventListener('click', () => {closePopup(popupEdit); }); 
+popupCloseEdit.addEventListener('click', () => {closePopup(popupEdit); });
+
+nameInput.addEventListener('keydown', (evt) =>{ closePopupEcs(evt, popupEdit)});
+
+jobInput.addEventListener('keydown', (evt) => {closePopupEcs(evt, popupEdit)});
+
+linkInput.addEventListener('keydown', (evt) => {closePopupEcs(evt, popupAdd)});
+
+titleInput.addEventListener('keydown', (evt) => {closePopupEcs(evt, popupAdd)});
 
 formElementEdit.addEventListener('submit', (evt) => {formSubmitHandler(evt, popupEdit)});
 
-popupOpenAdd.addEventListener('click', () => {openPopup(popupAdd); });
+popupOpenAdd.addEventListener('click', () => {
+  openPopup(popupAdd);
+  titleInput.value = ''
+  linkInput.value = ''
+});
 
 popupCloseAdd.addEventListener('click', () => {closePopup(popupAdd); }); 
 
@@ -137,6 +154,6 @@ popupCloseImage.addEventListener('click', () => {closePopup(popupOpenImage); });
 
 popupEdit.addEventListener('click', (evt) => {closePopupOverlay(evt, popupEdit)});
 
-popupAdd.addEventListener('click', (evt) => { closePopupOverlay(evt, popupAdd)});
+popupAdd.addEventListener('click', (evt) => {closePopupOverlay(evt, popupAdd)});
 
-popupOpenImage.addEventListener('click', (evt) => { closePopupOverlay(evt, popupOpenImage)});
+popupOpenImage.addEventListener('click', (evt) => {closePopupOverlay(evt, popupOpenImage)});
