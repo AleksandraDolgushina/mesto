@@ -148,7 +148,7 @@ popupOpenAdd.addEventListener('click', () => {
 
 popupCloseAdd.addEventListener('click', () => {closePopup(popupAdd); }); 
 
-formElementAdd.addEventListener('submit', (evt) => {handleAdd(evt, popupAdd)});
+formElementAdd.addEventListener('submit', (evt) => {handlerAdd(evt, popupAdd)});
 
 popupCloseImage.addEventListener('click', () => {closePopup(popupOpenImage); }); 
 
