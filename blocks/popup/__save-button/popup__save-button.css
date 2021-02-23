@@ -7,12 +7,22 @@
     cursor: pointer;
     transition: opacity .4s;
     color: white;
-    margin-top: 48px;
+    margin-top: 8px;
     background-color: black;
 }
 
 .popup__save-button:hover {
     opacity: .8;
+}
+
+.popup__save-button:disabled {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 2px;
+    opacity: .2;
+    cursor: default;
 }
 
 @media screen and (max-width: 582px) {
