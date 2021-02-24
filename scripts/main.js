@@ -1,3 +1,4 @@
+const popups = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const popupOpenEdit = document.querySelector('.profile__edit-button');
@@ -111,8 +112,6 @@ function handlerAdd(evt, popup) {
   linkInput.value = '';
   closePopup(popup);
 };
-
-const popups = document.querySelectorAll('.popup');
 
 popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
