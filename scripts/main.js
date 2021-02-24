@@ -21,52 +21,61 @@ const popupOpenImage = document.querySelector('.popup_open-image');
 const popupImage = document.querySelector('.popup__image');
 const popupPlace = document.querySelector('.popup__place');
 const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-  
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 function openPopup(popup) {
-    popup.classList.add('popup_opened');
-}
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape); 
+};
 
 function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-}
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape); 
+};
+
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  };
+};
 
 function handleSubmitHandler(evt, popup) {
     evt.preventDefault(); 
-    nameProfile.textContent = nameInput.value
-    jobProfile.textContent = jobInput.value
-    closePopup(popup)
-}
+    nameProfile.textContent = nameInput.value;
+    jobProfile.textContent = jobInput.value;
+    closePopup(popup);
+};
 
 function render() {
   const image = initialCards
-    .map(getItem)
+    .map(getItem);
   cardEl.append(...image);
-}
+};
 
 function getItem(item) {
   const newItem = templateEl.content.cloneNode(true);
@@ -80,45 +89,39 @@ function getItem(item) {
 
   newItem.querySelector('.element__like').addEventListener('click', function(evt) {
     evt.target.classList.toggle('element__like_active');
-  })
+  });
 
   newItem.querySelector('.element__delete').addEventListener('click', function(evt) {
-    const targetEl = evt.target
-    const targetItem = targetEl.closest('.element')
+    const targetEl = evt.target;
+    const targetItem = targetEl.closest('.element');
     targetItem.remove();
-  })
+  });
     
-  imageEl.addEventListener('click', function(evt) {
+  imageEl.addEventListener('click', function() {
     popupImage.src = item.link;
     popupImage.alt = item.name;
     popupPlace.textContent = item.name;
-    openPopup(popupOpenImage)
-  })
+    openPopup(popupOpenImage);
+  });
 
   return newItem;
 }
 
-function closePopupEcs(evt, popup) {
-  if (evt.key === 'Escape') {
-    closePopup(popup);
-  }
-}
-
 function handlerAdd(evt, popup) {
-  evt.preventDefault()
+  evt.preventDefault();
   const titleEl = titleInput.value;
   const linkEl = linkInput.value;
   cardEl.prepend(getItem({name: titleEl, link: linkEl}));
-  titleInput.value = ''
-  linkInput.value = ''
-  closePopup(popup)
-}
+  titleInput.value = '';
+  linkInput.value = '';
+  closePopup(popup);
+};
 
 const closePopupOverlay = (evt, popup) => {
  if (evt.target === evt.currentTarget) {
-   closePopup(popup)
- }
-}
+   closePopup(popup);
+ };
+};
 
 render();
 
@@ -130,20 +133,12 @@ popupOpenEdit.addEventListener('click', () => {
 
 popupCloseEdit.addEventListener('click', () => {closePopup(popupEdit); });
 
-nameInput.addEventListener('keydown', (evt) =>{ closePopupEcs(evt, popupEdit)});
-
-jobInput.addEventListener('keydown', (evt) => {closePopupEcs(evt, popupEdit)});
-
-linkInput.addEventListener('keydown', (evt) => {closePopupEcs(evt, popupAdd)});
-
-titleInput.addEventListener('keydown', (evt) => {closePopupEcs(evt, popupAdd)});
-
 formElementEdit.addEventListener('submit', (evt) => {handleSubmitHandler(evt, popupEdit)});
 
 popupOpenAdd.addEventListener('click', () => {
   openPopup(popupAdd);
-  titleInput.value = ''
-  linkInput.value = ''
+  titleInput.value = '';
+  linkInput.value = '';
 });
 
 popupCloseAdd.addEventListener('click', () => {closePopup(popupAdd); }); 
