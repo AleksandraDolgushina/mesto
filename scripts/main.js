@@ -2,17 +2,12 @@ const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const popupOpenEdit = document.querySelector('.profile__edit-button');
 const popupOpenAdd = document.querySelector('.profile__add-button');
-const popupCloseEdit = document.querySelector('.popup__close-edit');
-const popupCloseAdd = document.querySelector('.popup__close-add');
-const popupCloseImage = document.querySelector('.popup__close-image');
 const formElementEdit = document.querySelector('[name="form-edit"]');
 const formElementAdd = document.querySelector('[name="form-add"]');
 const nameInput = document.querySelector('.popup__item_type_name');
 const jobInput = document.querySelector('.popup__item_type_description');
 const titleInput = document.querySelector('.popup__item_type_title');
 const linkInput = document.querySelector('.popup__item_type_link');
-const saveButtonEdit = document.querySelector('.popup__save-button-edit');
-const saveButtonAdd = document.querySelector('.popup__save-button-add');
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__description');
 const cardEl = document.querySelector('.elements');
@@ -117,11 +112,18 @@ function handlerAdd(evt, popup) {
   closePopup(popup);
 };
 
-const closePopupOverlay = (evt, popup) => {
- if (evt.target === evt.currentTarget) {
-   closePopup(popup);
- };
-};
+const popups = document.querySelectorAll('.popup');
+
+popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup)
+        };
+        if (evt.target.classList.contains('popup__close')) {
+          closePopup(popup);
+        };
+    });
+});
 
 render();
 
@@ -131,8 +133,6 @@ popupOpenEdit.addEventListener('click', () => {
   jobInput.value = jobProfile.textContent;
  });
 
-popupCloseEdit.addEventListener('click', () => {closePopup(popupEdit); });
-
 formElementEdit.addEventListener('submit', (evt) => {handleSubmitHandler(evt, popupEdit)});
 
 popupOpenAdd.addEventListener('click', () => {
@@ -141,14 +141,4 @@ popupOpenAdd.addEventListener('click', () => {
   linkInput.value = '';
 });
 
-popupCloseAdd.addEventListener('click', () => {closePopup(popupAdd); }); 
-
 formElementAdd.addEventListener('submit', (evt) => {handlerAdd(evt, popupAdd)});
-
-popupCloseImage.addEventListener('click', () => {closePopup(popupOpenImage); }); 
-
-popupEdit.addEventListener('click', (evt) => {closePopupOverlay(evt, popupEdit)});
-
-popupAdd.addEventListener('click', (evt) => {closePopupOverlay(evt, popupAdd)});
-
-popupOpenImage.addEventListener('click', (evt) => {closePopupOverlay(evt, popupOpenImage)});
