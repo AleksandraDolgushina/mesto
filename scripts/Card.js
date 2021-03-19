@@ -1,17 +1,14 @@
-const popupOpenImage = document.querySelector('.popup_open-image');
-const popupImage = document.querySelector('.popup__image');
-const popupPlace = document.querySelector('.popup__place');
-
 export default class Card {
-    constructor(name, link, cardSelector) {
+    constructor(name, link, cardSelector, handleCardClick) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     };
   
     _getTemplate() {
         const cardElement = document
-            .querySelector('.template')
+            .querySelector(this._cardSelector)
             .content
             .querySelector('.element')
             .cloneNode(true);    
@@ -21,6 +18,7 @@ export default class Card {
     generateCard() {
         this._element = this._getTemplate();
         this._element.querySelector('.element__image').src = this._link;
+        this._element.querySelector('.element__image').alt = this._name;
         this._element.querySelector('.element__place').textContent = this._name;
         this._setEventListeners()
         return this._element;
@@ -55,24 +53,7 @@ export default class Card {
 		});
 
         this._element.querySelector('.element__image').addEventListener('click', () => {
-			this._handleOpenPopup();
+			this._handleCardClick(this._name, this._link)
 		});
     };
 };
-
-function openPopup(popup) {
-    popup.classList.add('popup_opened');
-    document.addEventListener('keydown', closeByEscape); 
-  };
-  
-  function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closeByEscape); 
-  };
-  
-  function closeByEscape(evt) {
-    if (evt.key === 'Escape') {
-      const openedPopup = document.querySelector('.popup_opened');
-      closePopup(openedPopup);
-    };
-  };
