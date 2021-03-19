@@ -15,6 +15,9 @@ const linkInput = document.querySelector('.popup__item_type_link');
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__description');
 const cardEl = document.querySelector('.elements');
+const popupOpenImage = document.querySelector('.popup_open-image');
+const popupImage = document.querySelector('.popup__image');
+const popupPlace = document.querySelector('.popup__place');
 const initialCards = [
   {
     name: 'Архыз',
@@ -55,9 +58,7 @@ const addFormValid = new FormValidator(valid, formElementAdd);
 addFormValid.enableValidation()
 
 initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link, '.template');
-  const cardElement = card.generateCard();
-  document.querySelector('.elements').append(cardElement);
+  cardEl.append(createCard(item.name, item.link));
 });
 
 function openPopup(popup) {
@@ -77,11 +78,19 @@ function closeByEscape(evt) {
   };
 };
 
+function handleCardClick(name, link) {
+  popupImage.src = link;
+  popupPlace.textContent = name;
+  openPopup(popupOpenImage);
+};
+
+function createCard(name, link) {
+  return new Card(name, link, '.template', handleCardClick).generateCard();
+};
+
 function handlerAdd(evt, popup) {
   evt.preventDefault();
-  const newCard = new Card(titleInput.value, linkInput.value, '.template');
-  const cardElement = newCard.generateCard();
-  cardEl.prepend(cardElement);
+  cardEl.prepend(createCard(titleInput.value, linkInput.value));
   titleInput.value = '';
   linkInput.value = ''; 
   closePopup(popup);
@@ -97,7 +106,7 @@ function handleSubmitHandler(evt, popup) {
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
-      closePopup(popup)
+      closePopup(popup);
     };
     if (evt.target.classList.contains('popup__close')) {
       closePopup(popup);
@@ -107,6 +116,7 @@ popups.forEach((popup) => {
 
 popupOpenEdit.addEventListener('click', () => {
   openPopup(popupEdit);
+  editFormValidator.resetValidation()
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 });
@@ -115,6 +125,7 @@ formElementEdit.addEventListener('submit', (evt) => {handleSubmitHandler(evt, po
 
 popupOpenAdd.addEventListener('click', () => {
   openPopup(popupAdd);
+  addFormValid.resetValidation()
   titleInput.value = '';
   linkInput.value = '';
 });
