@@ -1,65 +1,79 @@
-import Card from './components/Card.js'
-import FormValidator from '../scripts/FormValidator.js'
-import Section from './components/Section.js'
-import { cardEl, initialCards} from '../utils/constants.js';
-import PopupWithImage from './components/PopupWithImage.js';
+import Card from '../components/Card.js'
+import FormValidator from '../components/FormValidator.js'
+import Section from '../components/Section.js'
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import { 
+  cardEl,
+  formElementAdd,
+  formElementEdit,
+  initialCards,
+  jobInput,
+  jobProfile,
+  nameInput,
+  nameProfile,
+  popupAdd,
+  popupEdit,
+  popupOpenAdd,
+  popupOpenEdit,
+  valid
+} from '../utils/constants.js';
+  
+const editFormValidator = new FormValidator(valid, formElementEdit);
+editFormValidator.enableValidation();
+const addFormValid = new FormValidator(valid, formElementAdd);
+addFormValid.enableValidation();
+
+function createCard(data) {
+  const card = new Card(data, '.template', {
+    handleCardClick: (data) => {
+      openImage.open(data);
+    }
+  });
+  return card.generateCard();
+};
 
 const addCards = new Section({
   items: initialCards, 
   renderer: (data) => {
-    const card = createCard(data);
-    const cardElement = card.generateCard();
+    const cardElement = createCard(data);
     addCards.addItem(cardElement)
   }
 }, cardEl);
+
 addCards.renderItems();
 
-function createCard(data) {
-  return new Card(data, '.template', {
-    handleCardClick: (data) => {
-    new PopupWithImage('.popup_open-image').open(data)
-    } 
-  })
-};
+const openImage = new PopupWithImage('.popup_open-image');
+openImage.setEventListeners();
 
-const editFormValidator = new FormValidator(valid, formElementEdit);
-editFormValidator.enableValidation()
-const addFormValid = new FormValidator(valid, formElementAdd);
-addFormValid.enableValidation()
+const user = new UserInfo(nameProfile, jobProfile);
 
+const formEdit = new PopupWithForm(popupEdit, {
+  handleSubmit: (item) => {
+    user.setUserInfo({name: item.name, job: item.description})
+  }
+});
+formEdit.setEventListeners();
 
-
-
-function handlerAdd(evt, popup) {
-  evt.preventDefault();
-  cardEl.prepend(createCard(titleInput.value, linkInput.value));
-  titleInput.value = '';
-  linkInput.value = ''; 
-  closePopup(popup);
-};
-
-function handleSubmitHandler(evt, popup) {
-  evt.preventDefault(); 
-  nameProfile.textContent = nameInput.value;
-  jobProfile.textContent = jobInput.value;
-  closePopup(popup);
-};
-
+const formAdd = new PopupWithForm(popupAdd, {
+  handleSubmit: (item) => {
+    const card = createCard({name: item.title, link: item.link});
+    cardEl.prepend(card);
+    formAdd.close();
+  }
+});
+formAdd.setEventListeners();
 
 popupOpenEdit.addEventListener('click', () => {
-  openPopup(popupEdit);
-  editFormValidator.resetValidation()
-  nameInput.value = nameProfile.textContent;
-  jobInput.value = jobProfile.textContent;
+  formEdit.open();
+  const userInfo = user.getUserInfo();
+  nameInput.value = userInfo.name;
+  jobInput.value = userInfo.job;
+  editFormValidator.resetValidation();
 });
-
-formElementEdit.addEventListener('submit', (evt) => {handleSubmitHandler(evt, popupEdit)});
 
 popupOpenAdd.addEventListener('click', () => {
-  openPopup(popupAdd);
-  addFormValid.resetValidation()
-  titleInput.value = '';
-  linkInput.value = '';
+  formAdd.open();
+  addFormValid.resetValidation();
 });
-
-formElementAdd.addEventListener('submit', (evt) => {handlerAdd(evt, popupAdd)});
