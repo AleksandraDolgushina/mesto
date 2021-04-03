@@ -9,6 +9,7 @@ export const jobInput = document.querySelector('.popup__item_type_description');
 export const nameProfile = ('.profile__name');
 export const jobProfile = ('.profile__description');
 export const cardEl = document.querySelector('.elements');
+export const esc = 'Escape';
 export const initialCards = [
   {
     name: 'Архыз',

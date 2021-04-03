@@ -29,24 +29,24 @@ addFormValid.enableValidation();
 function createCard(data) {
   const card = new Card(data, '.template', {
     handleCardClick: (data) => {
-      openImage.open(data);
+      popupImage.open(data);
     }
   });
   return card.generateCard();
 };
 
-const addCards = new Section({
+const cardSection = new Section({
   items: initialCards, 
   renderer: (data) => {
     const cardElement = createCard(data);
-    addCards.addItem(cardElement)
+    cardSection.addItemAppend(cardElement)
   }
 }, cardEl);
 
-addCards.renderItems();
+cardSection.renderItems();
 
-const openImage = new PopupWithImage('.popup_open-image');
-openImage.setEventListeners();
+const popupImage = new PopupWithImage('.popup_open-image');
+popupImage.setEventListeners();
 
 const user = new UserInfo(nameProfile, jobProfile);
 
@@ -60,7 +60,7 @@ formEdit.setEventListeners();
 const formAdd = new PopupWithForm(popupAdd, {
   handleSubmit: (item) => {
     const card = createCard({name: item.title, link: item.link});
-    cardEl.prepend(card);
+    cardSection.addItemPrepend(card);
     formAdd.close();
   }
 });
