@@ -9,13 +9,13 @@ export default class UserInfo {
     getUserInfo() {
         const data = {        
             name: this._nameSelector.textContent,
-            job: this._jobSelector.textContent
+            about: this._jobSelector.textContent
         }
         return data;
     };
 
-    setUserInfo({name, job}) {
+    setUserInfo({name, about}) {
         this._nameSelector.textContent = name;
-        this._jobSelector.textContent = job;
+        this._jobSelector.textContent = about;
     };
 };

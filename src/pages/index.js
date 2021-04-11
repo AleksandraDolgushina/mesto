@@ -20,6 +20,7 @@ import {
   popupOpenEdit,
   valid
 } from '../utils/constants.js';
+import Api from '../components/Api';
   
 const editFormValidator = new FormValidator(valid, formElementEdit);
 editFormValidator.enableValidation();
@@ -35,15 +36,29 @@ function createCard(data) {
   return card.generateCard();
 };
 
-const cardSection = new Section({
-  items: initialCards, 
+const api = new Api({
+  address: 'https://mesto.nomoreparties.co/v1/cohort-22',
+  token: '0ee2eb4c-0866-4cef-874b-bf3a6be10df9'
+})
+
+const cardSection = new Section({ 
   renderer: (data) => {
     const cardElement = createCard(data);
     cardSection.addItemAppend(cardElement)
   }
 }, cardEl);
 
-cardSection.renderItems();
+api.getUser()
+  .then(item => {
+    user.setUserInfo(item)
+  })
+  .catch(err => console.log(err))
+
+api.getCard()
+  .then(item => {
+    cardSection.renderItems(item);
+  })
+  .catch(err => console.log(err))
 
 const popupImage = new PopupWithImage('.popup_open-image');
 popupImage.setEventListeners();
@@ -70,7 +85,7 @@ popupOpenEdit.addEventListener('click', () => {
   formEdit.open();
   const userInfo = user.getUserInfo();
   nameInput.value = userInfo.name;
-  jobInput.value = userInfo.job;
+  jobInput.value = userInfo.about;
   editFormValidator.resetValidation();
 });
 
