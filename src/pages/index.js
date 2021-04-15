@@ -5,13 +5,14 @@ import Section from '../components/Section.js'
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+import PopupWithDelete from '../components/PopupWithDelete';
 import { 
   avatarProfile,
   cardEl,
   formElementAdd,
   formElementEdit,
   formElementAvatar,
-  initialCards,
   jobInput,
   jobProfile,
   nameInput,
@@ -22,19 +23,16 @@ import {
   popupEdit,
   popupOpenAdd,
   popupOpenAvatar,
-  popupOpenDelete,
   popupOpenEdit,
   valid
 } from '../utils/constants.js';
-import Api from '../components/Api.js';
-import { PopupWithDelete } from '../components/PopupWithDelete';
   
 const editFormValidator = new FormValidator(valid, formElementEdit);
 editFormValidator.enableValidation();
 const addFormValid = new FormValidator(valid, formElementAdd);
 addFormValid.enableValidation();
 const editAvatarValidator = new FormValidator(valid, formElementAvatar);
-editAvatarValidator.enableValidation()
+editAvatarValidator.enableValidation();
 
 const user = new UserInfo(nameProfile, jobProfile, avatarProfile);
 
@@ -50,7 +48,7 @@ Promise.all([api.getCard(), api.getUser()])
   userId = userData._id;
   user.setUserInfo(userData);
   cardSection.renderItems(cardsArray);
-}) .catch(err => console.log(err))
+}) .catch(err => console.log(err));
 
 function createCard(data) {
   const card = new Card(data, '.template', user.getId(), {
@@ -62,23 +60,23 @@ function createCard(data) {
       popupDeleteCard.setSubmitAction(() => {
         api.deleteCard(id)
           .then(() => {
-            card.handleDelete()
-          }) .catch(err => console.log(err))
+            card.handleDelete();
+          }) .catch(err => console.log(err));
       })
     },
     handleLikeClick: (id) => {
       api.setLike(id)
         .then((res) => {
-          card.setCounter(res)
+          card.setCounter(res);
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     },
     handleLikeDelete: (id) => {
       api.deleteLike(id)
         .then((res) => {
-          card.setCounter(res)
+          card.setCounter(res);
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
   });
   return card.generateCard();
@@ -87,7 +85,7 @@ function createCard(data) {
 const cardSection = new Section({ 
   renderer: (data) => {
     const cardElement = createCard(data);
-    cardSection.addItemAppend(cardElement)
+    cardSection.addItemAppend(cardElement);
   }
 }, cardEl);
 
@@ -99,32 +97,44 @@ popupDeleteCard.setEventListeners();
 
 const formEdit = new PopupWithForm(popupEdit, {
   handleSubmit: (data) => {
+    formAdd.renderLoading(true);
     api.editUser(data)
       .then((result) => {
-        user.setUserInfo(result)
+        user.setUserInfo(result);
       }) .catch(err => console.log(err))
+      .finally(() => {
+        formEdit.renderLoading(false);
+      })
   }
 });
 formEdit.setEventListeners();
 
 const formAdd = new PopupWithForm(popupAdd, {
   handleSubmit: (data) => {
+    formAdd.renderLoading(true);
     api.addCard(data)
       .then(result => {
         const card = createCard(result);
         cardSection.addItemPrepend(card);
         formAdd.close();
       }) .catch(err => console.log(err))
+      .finally(() => {
+        formAdd.renderLoading(false)
+      })
   }
 });
 formAdd.setEventListeners();
 
 const avatarEdit = new PopupWithForm(popupAvatar, {
   handleSubmit: (data) => {
+    avatarEdit.renderLoading(true);
     api.setAvatar(data)
       .then(result => {
-        user.setUserAvatar(result)
+        user.setUserAvatar(result);
       }) .catch(err => console.log(err))
+      .finally(() => {
+        avatarEdit.renderLoading(false)
+      })
   }
 })
 avatarEdit.setEventListeners()
@@ -144,5 +154,5 @@ popupOpenAdd.addEventListener('click', () => {
 
 popupOpenAvatar.addEventListener('click', () => {
   avatarEdit.open();
-  editAvatarValidator.resetValidation()
+  editAvatarValidator.resetValidation();
 })

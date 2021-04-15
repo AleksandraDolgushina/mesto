@@ -8,7 +8,7 @@ export default class Api {
         if (response.ok) {
             return response.json()
         } return Promise.reject(`Ошибка ${response.status}`)
-    }
+    };
     
     getUser() {
         return fetch(`${this._address}/users/me`, {
@@ -16,7 +16,7 @@ export default class Api {
                 authorization: this._token
             }
         }) .then(this._handleResponse)
-        }
+    ;}
     
     getCard() {
         return fetch(`${this._address}/cards`, {
@@ -24,7 +24,7 @@ export default class Api {
                 authorization: this._token
             }
         }) .then(this._handleResponse)
-    }
+    };
         
     editUser(data) {
         return fetch(`${this._address}/users/me`, {
@@ -38,7 +38,7 @@ export default class Api {
                 about: data.about
             })
         }) .then(this._handleResponse)
-    }
+    };
 
     addCard(data) {
         return fetch(`${this._address}/cards`, {
@@ -52,7 +52,7 @@ export default class Api {
                 link: data.link
             })
         }) .then(this._handleResponse)
-    }
+    };
 
     deleteCard(id) {
         return fetch(`${this._address}/cards/${id}`, {
@@ -64,7 +64,7 @@ export default class Api {
         .then(response => response.ok
             ? Promise.resolve('success')
             : Promise.reject(`Ошибка ${response.status}`))
-    }
+    };
 
     setLike(id) {
         return fetch(`${this._address}/cards/likes/${id}`, {
@@ -73,7 +73,7 @@ export default class Api {
                 authorization: this._token,
             },
         }) .then(this._handleResponse)
-    }
+    };
 
     deleteLike(id) {
         return fetch(`${this._address}/cards/likes/${id}`, {
@@ -82,7 +82,7 @@ export default class Api {
                 authorization: this._token,
             },
         }) .then(this._handleResponse)
-    }
+    };
 
     setAvatar(data) {
         return fetch(`${this._address}/users/me/avatar`, {
@@ -95,5 +95,5 @@ export default class Api {
                 avatar: data.avatar
             })
         }) .then(this._handleResponse)
-    }
+    };
 }
