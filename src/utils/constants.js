@@ -15,6 +15,7 @@ export const popupOpenAdd = document.querySelector('.profile__add-button');
 export const popupOpenAvatar = document.querySelector('.profile__avatar-edit')
 export const popupOpenEdit = document.querySelector('.profile__edit-button');
 export const esc = 'Escape';
+export const saveButton = document.querySelector('.popup__save-button');
 export const valid = {
   inputSelector: '.popup__item',
   submitButtonSelector: '.popup__save-button',

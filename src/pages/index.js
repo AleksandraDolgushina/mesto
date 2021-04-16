@@ -58,10 +58,15 @@ function createCard(data) {
     handleDeleteButtonClick: (id) => {
       popupDeleteCard.open();
       popupDeleteCard.setSubmitAction(() => {
+        popupDeleteCard.renderLoading(true)
         api.deleteCard(id)
           .then(() => {
             card.handleDelete();
-          }) .catch(err => console.log(err));
+            popupDeleteCard.close()
+          }) .catch(err => console.log(err))
+          .finally(() => {
+            popupDeleteCard.renderLoading(false)
+          })
       })
     },
     handleLikeClick: (id) => {
@@ -97,10 +102,11 @@ popupDeleteCard.setEventListeners();
 
 const formEdit = new PopupWithForm(popupEdit, {
   handleSubmit: (data) => {
-    formAdd.renderLoading(true);
+    formEdit.renderLoading(true);
     api.editUser(data)
       .then((result) => {
         user.setUserInfo(result);
+        formEdit.close();
       }) .catch(err => console.log(err))
       .finally(() => {
         formEdit.renderLoading(false);
@@ -113,14 +119,14 @@ const formAdd = new PopupWithForm(popupAdd, {
   handleSubmit: (data) => {
     formAdd.renderLoading(true);
     api.addCard(data)
-      .then(result => {
+      .then((result) => {
         const card = createCard(result);
         cardSection.addItemPrepend(card);
         formAdd.close();
       }) .catch(err => console.log(err))
       .finally(() => {
         formAdd.renderLoading(false)
-      })
+      });
   }
 });
 formAdd.setEventListeners();
@@ -129,15 +135,17 @@ const avatarEdit = new PopupWithForm(popupAvatar, {
   handleSubmit: (data) => {
     avatarEdit.renderLoading(true);
     api.setAvatar(data)
-      .then(result => {
+      .then((result) => {
         user.setUserAvatar(result);
+        avatarEdit.close();
       }) .catch(err => console.log(err))
       .finally(() => {
         avatarEdit.renderLoading(false)
-      })
+      });
   }
-})
+});
 avatarEdit.setEventListeners()
+
 
 popupOpenEdit.addEventListener('click', () => {
   formEdit.open();
