@@ -1,6 +1,6 @@
 # Проект 4: Место
 
-### Адрес проекта на gh-pages https://aleksandradolgushina.github.io/mesto/. 
+#### *[Ссылка на проект на GitHub Pages](https://aleksandradolgushina.github.io/mesto/)*
 ### Описание
 В этом проекте мы познакомились с JavaScript и научились применять следующие команды:
 * Объявление переменной;
